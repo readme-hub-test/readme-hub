@@ -29,10 +29,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Install Bundler & Gems
-        run: |
-          gem install bundler
-          bundle install
+      - name: Install bundler
+        run: gem install bundler --user-install
+  
+      - name: Add gem executable path to PATH
+        run: echo "$HOME/.gem/ruby/3.2.0/bin" >> $GITHUB_PATH
+  
+      - name: Install dependencies
+        run: bundle install
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
