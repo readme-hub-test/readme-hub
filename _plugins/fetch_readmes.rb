@@ -22,7 +22,7 @@ module Jekyll
 
         begin
           readme_content = Net::HTTP.get(URI(readme_url))
-          site.data["readmes"] << { "name" => repo_name, "content" => readme_content }
+          File.write("_data/readmes.json", JSON.pretty_generate(site.data["readmes"]))
         rescue
           Jekyll.logger.warn "Couldn't call README for #{repo_name}"
         end
